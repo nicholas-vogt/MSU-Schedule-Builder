@@ -13,15 +13,15 @@ followed by optional excel and pdf downloads.
 
 More Specs
 ----------
-    1.  Limit third-party dependencies. The last thing I want is 90-percent 
+    1.  Limit third-party dependencies. I don't want 90-percent 
         of the code becoming useless when some import updates.
     2.  Keep it local. It's time consuming to keep pulling source code from
         the source. Do it once, then pull from file.
 
-Gathering Data ( * : Incomplete )
----------------------------------
+Gathering Data
+--------------
     1. Save the source code locally for each department. 
- *  2. Pull the following data from the source code. 
+    2. Pull the following data from the source code. 
         a. Course Code (This included a dept prefix)
         b. Course Title
         c. Prerequisites
