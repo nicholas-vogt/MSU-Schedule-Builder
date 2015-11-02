@@ -12,7 +12,7 @@ import requests
 import urllib.request as urlreq 
 import urllib.parse as urlparse
 
-from functions import *
+import functions
 
 URL = 'https://reg.msu.edu/Courses/Request.aspx?SubjectCode=mth&Term=current'
 # req = urlreq.Request(URL)
