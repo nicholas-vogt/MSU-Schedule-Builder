@@ -3,7 +3,7 @@ Scrape relevant text from MSU's Registrar and put into csv format with a tab del
 
 ToDo: Sort info properly by column. Some courses have more parameters than others.
 '''
-exitfrom sys import exit
+from sys import exit
 import html.parser
 import re
 
