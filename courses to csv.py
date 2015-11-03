@@ -6,9 +6,9 @@ ToDo: Sort info properly by column. Some courses have more parameters than other
 from sys import exit
 import html.parser
 import re
+import requests
 
 from bs4 import BeautifulSoup
-import requests
 import urllib.request as urlreq 
 import urllib.parse as urlparse
 
