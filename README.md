@@ -21,4 +21,6 @@ Everything we need is online at the MSU Registrar's Office.
 
 #To-Do
 
-Before anything else, there needs to be some serious cleanup in the organisation of this folder. 
+1. Clean course data.
+2. Think about how are we going to store program requirements.
+3. Create csv for program requirements. 
