@@ -43,11 +43,11 @@ class Setup:
         '''Get dept prefixes'''
         try:
             #txt file will empty if we don't assign save_file
-            save_file = open('homepage html.txt', 'r')
+            save_file = open('course htmls/!course homepage.txt', 'r')
         except FileNotFoundError:
             Setup.write_html('https://reg.msu.edu/Courses/Search.aspx',
-                             'homepage html.txt')
-            save_file = open('homepage html.txt', 'r')
+                             'course htmls/!course homepage.txt')
+            save_file = open('course htmls/!course homepage.txt', 'r')
         html = save_file.read()
         save_file.close()
         # All department info is of the form value="MTH"
@@ -55,7 +55,7 @@ class Setup:
         return dept_prefixes
 
 
-    def get_course_htmls(folder='course htmls'):
+    def get_course_htmls():
         '''
         Retrieves course source code by department. Writes raw source code to
         file according to department prefix. e.g. html files/MTH.txt.
@@ -63,8 +63,7 @@ class Setup:
         All MSU course codes have a department prefix. The form on MSU's
         course search includes a list of all department acronyms since 2000.
         '''
-        if folder != 'course htmls':
-            assert isinstance(folder, str), TypeError('Input must be string.')
+        folder = 'course htmls'
         dept_prefixes = Setup.get_dept_prefixes()
         url = 'https://reg.msu.edu/Courses/Request.aspx'
         if not os.path.exists(folder):
@@ -80,24 +79,17 @@ class Setup:
                              'course htmls/{}.txt'.format(dept_code))
 
 
-    def write_course_csv(csv='course data.txt', folder='course htmls'):
+    def write_course_csv():
         '''
         Retrieve all information from html files and export to txt
         files with tab '\t' delimiters.
         '''
+        csv = 'course data.txt'
+        folder='course htmls/'
         Setup.get_course_htmls()
-        if csv != 'course data.txt':
-            assert isinstance(csv, str), \
-                TypeError('Export file must be a string')
-            if '.' not in csv:
-                csv += '.txt'
-                print('File renamed to {}.'.format(csv))
         if os.path.exists(csv):
             print('{} already exists. CSV was not created.'.format(csv))
             return None
-        if folder != 'course htmls':
-            assert isinstance(folder, str), \
-                TypeError('folder name must be a string')
 
         DIR = [file_name for file_name in os.listdir(folder)]
         DIR_SIZE = len(DIR)
@@ -106,7 +98,7 @@ class Setup:
         for i, dept in enumerate(DIR):
             if i % (len(DIR) // 10) == 0:
                 print('\t{} percent completed...'.format(i*10 // (len(DIR) // 10)))
-            html_file = open(folder + '/' + dept, 'r')
+            html_file = open(folder + dept, 'r')
             html = html_file.read()
             html_file.close()
             soup = BeautifulSoup(html, 'html.parser')
@@ -120,25 +112,21 @@ class Setup:
         save_file.close()
 
 
-    def get_program_htmls(folder='program htmls/'):
+    def get_program_htmls():
         '''Get academic program htmls'''
-        if folder != 'program htmls/':
-            assert isinstance(folder, str), TypeError('Input must be string')
-            if folder[-1] != '/':
-                folder += '/'
-        print('Retrieving program HTML files...')
+        folder='program htmls/'
         try:
-            homepage = open('program homepage.txt', 'r')
+            homepage = open('program htmls/!program homepage.txt', 'r')
         except FileNotFoundError:
             url = 'https://reg.msu.edu/academicprograms/Programs.aspx?PType=UN'
-            Setup.write_html(url, 'program homepage.txt')
-            homepage = open('program homepage.txt', 'r')
+            Setup.write_html(url, 'program htmls/!program homepage.txt')
+            homepage = open('program htmls/!program homepage.txt', 'r')
         finally:
             html = homepage.read()
             homepage.close()
         if not os.path.exists(folder):
             os.makedirs(folder)
-
+        print('Retrieving program HTML files...')
         soup = BeautifulSoup(html, 'html.parser').find_all(class_='text')
         for tag in soup:
             link = tag.get('href')
