@@ -1,3 +1,5 @@
+Mango, make sure you save Setup.py to it's own folder. When you call the function Setup.get_all(), all the html sources will be exported to their respective folders. You'll also find a csv file you can open with excel. 
+
 #To-Do
 1. Clean Setup.py
 2. Think about how are we going to store program requirements.
